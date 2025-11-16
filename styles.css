@@ -1,0 +1,808 @@
+@charset "UTF-8";
+
+/* .about-text,
+.contact-intro {
+    outline: 1px solid red;
+    /* デバッグ用 
+} */
+
+/* {
+  outline: 1px solid red; /* デバッグ用 
+} */
+
+html {
+    font-size: 100%;
+    width: 100%;
+}
+
+body {
+    color: #333;
+    /* font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif; */
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: bottom;
+}
+
+li {
+    list-style: none;
+}
+ 
+span {
+    display: block;
+} 
+
+/*
+セクションタイトル
+*/
+.sec-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.sec-title::after {
+    content: "";
+    width: 160px;
+    height: 1px;
+    background-color: red;
+    display: block;
+    position: absolute;
+    /*
+    タイトルの真下に配置
+    */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*
+コンテンツ幅の設定するための共通クラス
+*/
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*モーダルウィンドウ*/
+/* モーダル背景 */
+.work-modal,
+.skill-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* モーダル本体 */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* 見出し */
+#skill-title ,
+#work-title{
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #d4c4aa;
+    padding-bottom: 8px;
+}
+
+/* ラベル（説明・実績例・強み） */
+.modal-content strong {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+}
+
+/*
+index.html
+*/
+/*---------------------------------
+header
+---------------------------------*/
+#header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-top: 60px;
+    background-color: #f2e5ce;
+}
+
+#header .img {
+    position: absolute;
+    /*
+    ---------中心に配置---------
+    */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*-------------------------*/
+    width: 30%;
+    height: auto;
+    opacity: 0.3;
+}
+
+#header .main-navi {
+    font-size: 1.5rem;
+    padding-right: 30px;
+    /*縦書き*/
+    writing-mode: vertical-rl;
+}
+
+
+#header .main-navi ul li {
+    margin-left: 40px;
+    transition: 0.3s;
+}
+
+#header .main-navi ul li a {
+    color: #444;
+    transition: 0.3s;
+}
+
+/*
+マウスカーソルが乗ったときの処理
+*/
+#header .main-navi ul li a:hover {
+    color: #6c63ff;
+    text-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+
+#header .site-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+}
+
+#header .site-title .en {
+    font-size: 3rem;
+    font-family: 'Pacifico', cursive;
+}
+
+#header .site-title .slide {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.6s ease-out;
+}
+
+#header .site-title .slide.inview {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*
+ハンバーガーメニュー
+*/
+#header .hamburger {
+    display: none;
+}
+
+#header .hamburger-navi {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #a3a0a0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    visibility: hidden;
+    z-index: 20;
+}
+
+#header .hamburger-navi ul {
+    margin-top: 100px;
+}
+
+#header .hamburger-navi li {
+    margin-bottom: 20px;
+}
+
+#header .hamburger-navi li:hover a {
+    color: #6c63ff;
+}
+
+/*---------------------------------
+Work-List
+-----------------------------------*/
+#work-list {
+    background-color: #F2EBDF;
+    text-align: center;
+    padding: 65px 10% 65px 10%;
+}
+
+#work-list .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#work-list .list .flex {
+    width: 45%;
+}
+
+#work-list .list .zoom-box {
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#work-list .list .work {
+    display: block;
+    margin-bottom: 30px;
+    transition-duration: .5s;
+}
+
+#work-list .list .work:hover {
+    transform: scale(1.2);
+}
+
+#work-list .list .flex .work-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#work-list .btn {
+    font-size: 1rem;
+    font-family: "Inknut Antiqua", serif;
+}
+
+#work-list .btn a {
+    display: inline-block;
+    padding: 10px 45px 10px 45px;
+    border: solid 1px #333;
+    transition: all 0.5s;
+
+}
+
+#work-list .btn a:hover {
+    background-color: #6c63ff;
+    color: #fff;
+}
+
+/* 「制作期間：〜」の行だけ横並びにする */
+.project-info li:first-child {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.project-info li:first-child strong {
+  margin-right: 6px;
+}
+
+
+/*----------------------------------
+Skill-List
+-----------------------------------*/
+#skill-list {
+    padding: 65px 0 65px 0;
+    background-color: #f2e5ce;
+}
+
+.skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid orange;
+    margin: 0 auto 40px auto;
+    padding: 10px 0;
+    width: 80%;
+    cursor: pointer;
+}
+
+.skill-row:nth-of-type(5) {
+    margin-bottom: 50px;
+}
+
+.skill-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+.stars {
+    /* 薄い紫色 */
+    color: #c88dc8;
+    font-size: 1.75rem;
+    letter-spacing: 1.5rem;
+}
+
+/* テキスト部分 */
+#skill-description,
+#skill-example,
+#skill-strengths {
+    margin: 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* ×ボタン */
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #e85c4e;
+}
+
+
+/*-----------------------------------
+Contact
+------------------------------------*/
+#contact {
+    background-color: #F2EBDF;
+    padding: 65px 0 65px 0;
+}
+
+#contact form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/*
+入力ボックスのデザイン
+*/
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: D9D9D9;
+}
+
+/*
+送信ボタンのデザイン
+*/
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #5848d9;
+}
+
+/*------------------------------------
+footer
+-------------------------------------*/
+#footer {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 65px 10% 65px 10%;
+    background-color: #f2e5ce;
+}
+
+#footer .main-navi {
+    padding-right: 50px;
+    /*縦書き*/
+    writing-mode: vertical-rl;
+}
+
+#footer .main-navi ul li {
+    margin-left: 50px;
+    transition: 0.3s;
+}
+
+/*
+マウスカーソルが乗ったときの処理
+*/
+
+#footer .main-navi ul li:hover a {
+    color: #6c63ff;
+}
+
+#footer .sns ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#footer .sns li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 6px;
+    font-family: "M PLUS 1p", sans-serif;
+}
+
+#footer .sns .label {
+    display: inline-block;
+    width: 150px;
+    /* ←ここでコロン部分までの幅を固定 */
+}
+
+#footer.sns a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 0.5em;
+}
+
+#footer .sns a:hover {
+    color: #6c63ff;
+}
+
+/*
+about.html
+*/
+/*-----------------------------
+header-sub
+-------------------------------*/
+#header-sub {
+    position: fixed;
+    width: 100%;
+    background-color: #f2e5ce;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    z-index: 15;
+}
+
+#header-sub .main-navi ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 0 5% 0 5%;
+}
+
+#header-sub .main-navi li {
+    width: 140px;
+    text-align: center;
+    /* background-color: #a9d9a2; */
+    height: 50px;
+    line-height: 50px;
+    margin-right: 2px;
+}
+
+/*グラデーション*/
+#header-sub .main-navi li a {
+    color: #fff;
+    background: linear-gradient(90deg, #6c63ff, #9b8cff);
+    background-size: 200% auto;
+    transition: background-position 0.5s, transform 0.3s;
+}
+
+#header-sub .main-navi li a:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+}
+
+/*------------------------------
+about
+--------------------------------*/
+#about {
+    background-color: #F2EBDF;
+    padding: 105px 0;
+    font-size: 1.25rem;
+}
+
+.about-content {
+    padding: 0 100px 0 140px;
+}
+
+.about-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+}
+
+.about-content h4 {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #6c63ff;
+}
+
+.about-content .contact,
+.about-content .intro {
+    margin-left: 20px;
+}
+
+.about-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.about-photo {
+    margin-left: 30px;
+}
+
+.about-photo img {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #c88dc8;
+}
+
+.about-text {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.about-text p,
+.about-text li {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+
+/*------------------------------
+works
+--------------------------------*/
+#works {
+    background-color: #F2EBDF;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.coming-soon {
+    font-size: 1.25rem;
+    color: #666;
+    margin-top: 40px;
+}
+
+
+/* =========================
+全体の色統一調整
+======================
+
+/* about.html ヘッダー */
+
+
+
+
+
+
+
+/*------------------------------------
+SP
+-------------------------------------*/
+@media screen and (max-width: 900px) {
+
+    /*-----------------------------
+    header
+    -------------------------------*/
+    #header .img {
+        width: 265px;
+    }
+
+    #header .main-navi {
+        display: none;
+    }
+
+    /*
+    ハンバーガーメニュー
+    */
+    #header .hamburger {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        background-color: #6c63ff;
+        z-index: 10;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 25;
+    }
+
+    #header .hamburger:hover {
+        opacity: 0.7;
+    }
+
+    /* ハンバーガーメニュー */
+    #header .hamburger-navi {
+        background-color: rgba(242, 235, 223, 0.95);
+    }
+
+    #header .hamburger-navi li a {
+        color: #333;
+        transition: color 0.3s;
+    }
+
+    #header .hamburger-navi li a:hover {
+        color: #6c63ff;
+    }
+
+
+    /*ハンバーガーメニューの線の設定(メニューが閉じているとき)*/
+    #header .hamburger span {
+        width: 30px;
+        height: 2px;
+        position: absolute;
+        left: 10px;
+        background: #fff;
+        transition: 0.3s ease-in-out;
+    }
+
+    /*1本目の線の位置を設定*/
+    #header .hamburger span:nth-child(1) {
+        top: 11.5px;
+    }
+
+    /*2本目の線の位置を設定*/
+    #header .hamburger span:nth-child(2) {
+        top: 23.5px;
+    }
+
+    /*3本目の線の位置を設定*/
+    #header .hamburger span:nth-child(3) {
+        top: 35.5px;
+    }
+
+
+    /*--------------------------------------------------
+    ハンバーガーメニューがクリックされた際に、
+    jqueryでactiveクラスを追加して、
+    メニューを表示させる。
+    ---------------------------------------------------*/
+
+    /*
+    ハンバーガーメニューの線の設定(メニューが開いているとき)
+    1本目の線を-45度回転
+    */
+    #header .hamburger.active span:nth-child(1) {
+        top: 22px;
+        left: 11px;
+        background: #fff;
+        transform: rotate(-45deg);
+    }
+
+    /*2本目と3本目を重ねて45度回転*/
+    #header .hamburger.active span:nth-child(2),
+    #header .hamburger.active span:nth-child(3) {
+        top: 22px;
+        background: #fff;
+        transform: rotate(45deg);
+    }
+
+    /*
+    ハンバーガーメニューが開いた後に
+    表示されるメニュー
+    */
+    #header .hamburger-navi.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /*-----------------------------------
+    Work-List
+    -------------------------------------*/
+    #work-list {
+        padding: 65px 80px 65px 80px;
+    }
+
+    #work-list .list {
+        flex-direction: column;
+    }
+
+    #work-list .list .flex {
+        width: 100%;
+    }
+
+    /*-------------------------------------
+    Skill-List
+    ---------------------------------------*/
+    .skill-row {
+        flex-direction: column;
+    }
+
+    /*-------------------------------------
+    footer
+    ---------------------------------------*/
+    #footer {
+        padding: 8%;
+    }
+
+    #footer .main-navi ul li {
+        margin-left: 5%;
+    }
+
+    #footer .sns {
+        font-size: 1rem;
+    }
+
+    /*-------------------------------------
+    header-sub
+    ---------------------------------------*/
+    #header-sub .main-navi li {
+        font-size: 0.75rem;
+        width: 120px;
+        margin-right: 1px;
+    }
+
+    /*-------------------------------------
+    about
+    ---------------------------------------*/
+    .about-content {
+        padding: 0;
+    }
+
+    .about-flex {
+        flex-direction: column;
+    }
+
+    .about-text {
+        /* padding: 3%; */
+        padding: 0;
+    }
+
+    .contact-intro {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .about-photo {
+        margin: 20px 0 20px 50px;
+    }
+
+    .about-photo img {
+        width: 300px;
+        height: 300px;
+    }
+
+}

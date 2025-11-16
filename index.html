@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomo's portfolio</title>
+    <link rel="icon" href="">
+    <meta name="description" content="Tomohiroのポートフォリオ">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!-- ここにページの内容を記述 -->
+    <header id="header">
+        <nav class="main-navi wrapper">
+            <ul>
+                <li><a href="index.html">トップ</a></li>
+                <li><a href="about.html">自己紹介</a></li>
+                <li><a href="#work-list">作品一覧</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+
+        <div class="img wrapper">
+            <img src="./img/test.png" alt="Tomohiro Okubo">
+        </div>
+
+        <h1 class="site-title">
+            <span class="slide en">Tomohiro Okubo</span>
+            <span class="slide ja">エンジニアOkuboの作品・スキル紹介</span>
+        </h1>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="hamburger-navi">
+            <ul>
+                <li><a href="about.html">自己紹介</a></li>
+                <li><a href="#work-list">作品一覧</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="work-list">
+            <h2 class="sec-title">
+                作品一覧
+            </h2>
+            <div class="list">
+                <div class="flex">
+                    <div class="zoom-box">
+                        <div class="work">
+                            <img src="./img/work-list1.jpg" data-title="Tomo's portfolio" data-catch="Tomohiroのポートフォリオ"
+                                data-period="約1か月" data-skill="HTML/CSS/jQuery" data-role="デザイン～実装"
+                                data-points1="シンプルな構成で、だれにでも見やすいことを意識しました。"
+                                data-points2="cssやjQueryを使用し、アニメーションを付けることで個性を演出しました。" data-demo="https://example.com"
+                                data-github="https://github.com/example">
+                        </div>
+                    </div>
+                    <p class="work-title">
+                        Tomohiro Okubo's Portfolio
+                    </p>
+                </div>
+                <div class="flex">
+                    <div class="zoom-box">
+                        <div class="work">
+                            <img src="./img/work-list2.jpg" data-title="Codejump[応用編] BBB英会話スクール"
+                                data-catch=" サイトCodejumpの応用編" data-period="約2週間" data-skill="HTML/CSS/jQuery"
+                                data-role="Figmaからの実装" data-points1="コードが複雑化しないように簡潔にコードを書くこと意識した。"
+                                data-points2="レスポンシブ対応のとき、レイアウトが崩れないようにした。" data-points3="jQueryの実装で見やすいように値設定を行った。"
+                                data-demo="https://example.com" data-github="https://github.com/example">
+                        </div>
+                    </div>
+                    <p class="work-title">
+                        Codejump[応用編] BBB英会話スクール
+                    </p>
+                </div>
+                <div class="flex">
+                    <div class="zoom-box">
+                        <div class="work">
+                            <img src="./img/work-list3.jpg"data-title="Codejump[上級編] Travel Blog"
+                                data-catch=" サイトCodejumpの上級編" data-period="約1週間" data-skill="HTML/CSS/jQuery"
+                                data-role="Figmaからの実装" data-points1="コードが複雑化しないように簡潔にコードを書くこと意識した。"
+                                data-points2="デザイン意図を理解するために、余白や文字サイズのルールを整理して実装した"
+                                data-demo="https://example.com" data-github="https://github.com/example">
+                        </div>
+                    </div>
+                    <p class="work-title">
+                        Codejump[上級編] Travel Blog
+                    </p>
+                </div>
+                <div class="flex">
+                    <div class="zoom-box">
+                        <div class="work">
+                            <img src="./img/work-list4.jpg"data-title="Codejump[上級編] 明るいHOUSE"
+                                data-catch=" サイトCodejumpの上級編" data-period="約1週間" data-skill="HTML/CSS/jQuery"
+                                data-role="Figmaからの実装" data-points1="コードが複雑化しないように簡潔にコードを書くこと意識した。"
+                                data-points2="ボタンやリンクにhoverアニメーションを追加し、ユーザーが操作しやすいUIに改善" 
+                                data-demo="https://example.com" data-github="https://github.com/example">
+                        </div>
+                    </div>
+                    <p class="work-title">
+                        Codejump[上級編] 明るいHOUSE
+                    </p>
+                </div>
+
+                <div id="work-modal" class="work-modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="popup-content">
+                            <h3 id="work-title"></h3>
+                            <p id="work-catch"></p>
+                            <img id="work-img">
+
+                            <ul class="project-info">
+                                <li><strong>制作期間：</strong><span id="work-period"></span></li>
+                                <li><strong>使用技術：</strong><span id="work-skill"></span></li>
+                                <li><strong>担当範囲：</strong><span id="work-role"></span></li>
+                            </ul>
+
+                            <strong>工夫した点：</strong>
+                            <p id="work-point"></p>
+                            <p class="links">
+                                <a id="work-demo" href="">デモサイトを見る</a>
+                                <a id="work-github" href="">GitHub</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="./works.html">More</a>
+            </div>
+        </section>
+
+        <section id="skill-list">
+            <div class="wrapper">
+                <h2 class="sec-title">
+                    スキル一覧
+                </h2>
+                <div class="skill-row" data-skill="html">
+                    <span class="skill-name">HTML</span>
+                    <span class="stars">★ ★ ★ ★</span>
+                </div>
+                <div class="skill-row" data-skill="css">
+                    <span class="skill-name">CSS</span>
+                    <span class="stars">★ ★ ★</span>
+                </div>
+                <div class="skill-row" data-skill="django">
+                    <span class="skill-name">Django</span>
+                    <span class="stars">★ ★ ★ ★</span>
+                </div>
+                <div class="skill-row" data-skill="js">
+                    <span class="skill-name">JavaScript/jQuery</span>
+                    <span class="stars">★ ★ ★ ★</span>
+                </div>
+                <div class="skill-row" data-skill="figma">
+                    <span class="skill-name">Figma</span>
+                    <span class="stars">★ ★ ★</span>
+                </div>
+                <!-- <div class="btn">
+                    <a href="#">Detail</a>
+                </div> -->
+            </div>
+            <!-- モーダル共通 -->
+            <div class="skill-modal" id="skill-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="skill-title"></h3>
+                    <strong>説明：</strong>
+                    <p id="skill-description"></p>
+                    <strong>実績例：</strong>
+                    <div id="skill-example"></div>
+                    <strong>強み：</strong>
+                    <p id="skill-strengths"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="wrapper">
+                <h2 class="sec-title">
+                    お問い合わせ
+                </h2>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">お名前</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">お問い合わせ内容</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit">送信</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <nav class="main-navi">
+            <ul>
+                <li><a href="#top">トップ</a></li>
+                <li><a href="about.html">自己紹介</a></li>
+                <li><a href="#work-list">作品一覧</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+
+        <nav class="sns">
+            <ul>
+                <li><span class="label">X(旧Twitter):</span><a href="https://x.com/tomo24575">　@tomo24575</a></li>
+                <li><span class="label">Gmail:</span><a href="#">　sample</a></li>
+                <li><span class="label">Qiita:</span><a href="https://qiita.com/tomo0227">　@tomo0227</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+
+</html>
